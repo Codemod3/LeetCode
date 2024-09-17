@@ -1,22 +1,24 @@
 #include <vector>
 #include <algorithm>
+#include <unordered_map>
 
 using namespace std;
 
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        if (nums.size() == 1)
-            return nums[0];
-        
-        sort(nums.begin(), nums.end());
-        for (int i = 0; i < nums.size() - 1; i += 2) {
-            if (nums[i] != nums[i + 1])
-                return nums[i];
+        unordered_map <int,int> map;
+        for(int num : nums)
+        {
+            map[num]++;
+        }
+        for(int num :nums)
+        {
+            if(map[num]==1)
+            return num;
         }
 
-        // If no single number was found in the loop, return the last element
-        return nums.back();
+        return 1;
     }
 };
 
